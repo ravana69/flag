@@ -1,33 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24">
-  <foreignObject width="100%" height="100%">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size: 24px;">
-      <script>
-        // Function to get the current date and return a random number based on it
-        function getRandomNumber(seed) {
-          const today = new Date();
-          const dateString = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-          const seedNum = parseInt(seed, 36);
-          const dateNum = parseInt(dateString, 36);
-          const randomNumber = (seedNum * dateNum) % 262; // 262 is the number of flags (flag1.svg to flag261.svg)
-          return randomNumber;
-        }
+<!-- Add a container to hold the flag -->
+<div id="flag-container">
+  <img id="country-flag" src="https://ravana69.github.io/flag/flags/flag.svg" alt="Random Country Flag">
+</div>
 
-        // Get a random number based on the repository name to ensure uniqueness
-        const repoName = window.location.pathname.split('/')[2];
-        const randomNumber = getRandomNumber(repoName);
+<!-- JavaScript to change the flag randomly -->
+<script>
+const flagContainer = document.getElementById('flag-container');
+const flagImage = document.getElementById('country-flag');
+const flags = [
+  'flag1.svg', // Replace with actual flag filenames
+  'flag2.svg',
+  'flag3.svg',
+  // Add more flags as needed
+];
 
-        // Generate the image link
-        const imageUrl = `https://raw.githubusercontent.com/ravana69/flag/master/flags/flag${randomNumber}.svg`;
+function getRandomFlag() {
+  const randomIndex = Math.floor(Math.random() * flags.length);
+  const randomFlag = flags[randomIndex];
+  flagImage.src = `https://ravana69.github.io/flag/flags/${randomFlag}`;
+}
 
-        // Create and append the flag image to the SVG
-        const imageElement = document.createElementNS('http://www.w3.org/2000/svg', 'image');
-        imageElement.setAttribute('href', imageUrl);
-        imageElement.setAttribute('x', '0');
-        imageElement.setAttribute('y', '0');
-        imageElement.setAttribute('width', '100%');
-        imageElement.setAttribute('height', '100%');
-        document.querySelector('svg').appendChild(imageElement);
-      </script>
-    </div>
-  </foreignObject>
-</svg>
+getRandomFlag(); // Call this function to set a random flag initially
+
+// Optional: You can also change the flag when the user clicks on it
+flagContainer.addEventListener('click', () => {
+  getRandomFlag();
+});
+</script>
