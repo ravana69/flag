@@ -1,302 +1,33 @@
-<SCRIPT LANGUAGE="JavaScript">
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24">
+  <foreignObject width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size: 24px;">
+      <script>
+        // Function to get the current date and return a random number based on it
+        function getRandomNumber(seed) {
+          const today = new Date();
+          const dateString = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+          const seedNum = parseInt(seed, 36);
+          const dateNum = parseInt(dateString, 36);
+          const randomNumber = (seedNum * dateNum) % 262; // 262 is the number of flags (flag1.svg to flag261.svg)
+          return randomNumber;
+        }
 
-<!-- Begin
-// Set up the image files to be used.
-var theImages = new Array() // do not change this
-// To add more image files, continue with the
-// pattern below, adding to the array.
+        // Get a random number based on the repository name to ensure uniqueness
+        const repoName = window.location.pathname.split('/')[2];
+        const randomNumber = getRandomNumber(repoName);
 
-theImages[0] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[1] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AD.svg'
-theImages[2] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AE.svg'
-theImages[3] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AF.svg'
-theImages[4] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AG.svg'
-theImages[5] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AI.svg'
-theImages[6] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AL.svg'
-theImages[7] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AM.svg'
-theImages[8] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AO.svg'
-theImages[9] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AQ.svg'
-theImages[10] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AR.svg'
-theImages[11] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AS.svg'
-theImages[12] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AT.svg'
-theImages[13] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AU.svg'
-theImages[14] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AW.svg'
-theImages[15] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AX.svg'
-theImages[16] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AZ.svg'
-theImages[17] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BA.svg'
-theImages[18] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BB.svg'
-theImages[19] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BD.svg'
-theImages[20] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BE.svg'
-theImages[21] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BF.svg'
-theImages[22] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BG.svg'
-theImages[23] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BH.svg'
-theImages[24] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BI.svg'
-theImages[25] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BJ.svg'
-theImages[26] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BL.svg'
-theImages[27] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BM.svg'
-theImages[28] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BN.svg'
-theImages[29] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BO.svg'
-theImages[30] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BQ.svg'
-theImages[31] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BR.svg'
-theImages[32] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BS.svg'
-theImages[33] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BT.svg'
-theImages[34] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BV.svg'
-theImages[35] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BW.svg'
-theImages[36] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BY.svg'
-theImages[37] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/BZ.svg'
-theImages[38] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CA.svg'
-theImages[39] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CC.svg'
-theImages[40] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CD.svg'
-theImages[41] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CF.svg'
-theImages[42] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CG.svg'
-theImages[43] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CH.svg'
-theImages[44] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CI.svg'
-theImages[45] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CK.svg'
-theImages[46] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CL.svg'
-theImages[47] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CM.svg'
-theImages[48] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CN.svg'
-theImages[49] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CO.svg'
-theImages[50] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CP.svg'
-theImages[51] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CR.svg'
-theImages[52] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CU.svg'
-theImages[53] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CV.svg'
-theImages[54] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CW.svg'
-theImages[55] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CX.svg'
-theImages[56] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CY.svg'
-theImages[57] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/CZ.svg'
-theImages[58] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/DE.svg'
-theImages[59] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/DG.svg'
-theImages[60] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/DJ.svg'
-theImages[61] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/DK.svg'
-theImages[62] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/DM.svg'
-theImages[63] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/DO.svg'
-theImages[64] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/DZ.svg'
-theImages[65] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[66] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[67] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[68] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[69] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[70] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[71] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[72] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[73] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[74] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[75] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[76] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[77] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[78] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[79] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[80] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[81] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[82] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[83] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[84] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[85] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[86] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[87] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[88] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[89] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[90] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[91] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[92] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[93] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[94] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[95] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[96] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[97] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[98] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[99] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[100] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[101] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[102] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[103] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[104] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[105] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[106] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[107] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[108] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[109] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[110] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[111] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[112] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[113] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[114] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[115] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[116] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[117] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[118] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[119] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[120] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[121] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[122] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[123] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[124] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[125] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[126] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[127] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[128] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[129] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[130] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[131] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[132] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[133] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[134] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[135] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[136] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[137] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[138] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[139] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[140] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[141] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[142] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[143] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[144] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[145] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[146] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[147] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[148] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[149] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[150] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[151] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[152] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[153] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[154] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[155] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[156] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[157] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[158] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[159] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[160] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[161] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[162] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[163] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[164] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[165] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[166] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[167] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[168] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[169] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[170] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[171] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[172] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[173] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[174] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[175] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[176] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[177] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[178] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[179] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[180] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[181] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[182] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[183] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[184] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[185] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[186] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[187] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[188] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[189] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[190] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[191] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[192] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[193] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[194] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[195] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[196] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[197] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[198] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[199] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[200] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[201] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[202] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[203] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[204] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[205] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[206] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[207] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[208] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[209] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[210] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[211] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[212] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[213] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[214] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[215] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[216] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[217] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[218] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[219] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[220] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[221] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[222] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[223] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[224] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[225] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[226] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[227] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[228] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[229] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[230] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[231] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[232] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[233] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[234] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[235] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[236] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[237] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[238] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[239] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[240] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[241] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[242] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[243] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[244] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[245] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[246] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[247] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[248] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[249] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[250] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[251] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[252] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[253] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[254] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[255] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[256] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[257] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[258] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[259] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[260] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
-theImages[261] = 'https://raw.githubusercontent.com/ravana69/flag/main/img/AC.svg'
+        // Generate the image link
+        const imageUrl = `https://raw.githubusercontent.com/ravana69/flag/master/flags/flag${randomNumber}.svg`;
 
-// do not edit anything below this line
-
-var j = 0
-var p = theImages.length;
-var preBuffer = new Array()
-for (i = 0; i < p; i++){
-   preBuffer[i] = new Image()
-   preBuffer[i].src = theImages[i]
-}
-var whichImage = Math.round(Math.random()*(p-1));
-function showImage(){
-document.write('<img src="'+theImages[whichImage]+'">');
-}
-
-//  End -->
-</script>
-
-</HEAD>
-
-<!-- STEP TWO: Copy this code into the BODY of your HTML document  -->
-
-<BODY>
-
-<SCRIPT LANGUAGE="JavaScript">
-
-
-
-<!-- Begin
-showImage();
-//  End -->
-</script>
+        // Create and append the flag image to the SVG
+        const imageElement = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+        imageElement.setAttribute('href', imageUrl);
+        imageElement.setAttribute('x', '0');
+        imageElement.setAttribute('y', '0');
+        imageElement.setAttribute('width', '100%');
+        imageElement.setAttribute('height', '100%');
+        document.querySelector('svg').appendChild(imageElement);
+      </script>
+    </div>
+  </foreignObject>
+</svg>
